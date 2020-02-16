@@ -17,10 +17,7 @@ main = do
       getLine >>= \case
         "quit" -> putStrLn "Goodbye!"
         userGuess ->
-          case liftA2
-                 compare
-                 (readMaybe userGuess :: Maybe Int)
-                 (pure randomNumber) of
+          case liftA2 compare (readMaybe userGuess) (pure randomNumber) of
             Just EQ -> putStrLn "You win!"
             Just LT -> putStrLn "Too small!" >> guess randomNumber
             Just GT -> putStrLn "Too big!" >> guess randomNumber
