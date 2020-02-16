@@ -1,0 +1,29 @@
+name: guessing-game
+version: 0.1.0.0
+github: "aggressivepixels/guessing-game"
+license: Unlicense
+author: "Jonathan Hernández"
+maintainer: "aggressivepixels@gmail.com"
+
+extra-source-files:
+  - README.md
+
+description: Please see the README on GitHub at <https://github.com/aggressivepixels/guessing-game#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - random
+
+executables:
+  guessing-game-exe:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -Wall
+      - -Wcompat
+      - -Wincomplete-record-updates
+      - -Wincomplete-uni-patterns
+      - -Wredundant-constraints
