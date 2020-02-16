@@ -3,6 +3,7 @@
 
 module Main where
 
+import Control.Monad (liftM2)
 import System.Random (randomRIO)
 import Text.Read (readMaybe)
 
@@ -16,10 +17,11 @@ main = do
       getLine >>= \case
         "quit" -> putStrLn "Goodbye!"
         userGuessStr ->
-          case readMaybe userGuessStr :: Maybe Int of
-            Just userGuess ->
-              case compare userGuess randomNumber of
-                EQ -> putStrLn "You win!"
-                LT -> putStrLn "Too small!" >> guess randomNumber
-                GT -> putStrLn "Too big!" >> guess randomNumber
+          case liftM2
+                 compare
+                 (readMaybe userGuessStr :: Maybe Int)
+                 (pure randomNumber) of
+            Just EQ -> putStrLn "You win!"
+            Just LT -> putStrLn "Too small!" >> guess randomNumber
+            Just GT -> putStrLn "Too big!" >> guess randomNumber
             Nothing -> putStrLn "Please write a number!" >> guess randomNumber
