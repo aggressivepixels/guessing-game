@@ -3,7 +3,7 @@
 
 module Main where
 
-import Control.Monad (liftM2)
+import Control.Applicative (liftA2)
 import System.Random (randomRIO)
 import Text.Read (readMaybe)
 
@@ -17,7 +17,7 @@ main = do
       getLine >>= \case
         "quit" -> putStrLn "Goodbye!"
         userGuessStr ->
-          case liftM2
+          case liftA2
                  compare
                  (readMaybe userGuessStr :: Maybe Int)
                  (pure randomNumber) of
